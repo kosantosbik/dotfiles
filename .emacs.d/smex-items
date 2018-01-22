@@ -1,0 +1,30 @@
+
+;; ----- smex-history -----
+(
+ tetris
+ yas-minor-mode
+ hideshowvis-enable
+ list-packages
+ package-install
+ make-directory
+ load-file
+)
+
+;; ----- smex-data -----
+(
+ (tetris . 155)
+ (customize-group . 3)
+ (make-directory . 2)
+ (indent-to . 1)
+ (package-install . 4)
+ (recover-file . 1)
+ (recover-this-file . 1)
+ (elixir-mode-menu . 1)
+ (elixir-mode . 1)
+ (auto-fill-mode . 1)
+ (alchemist-mix . 1)
+ (load-file . 1)
+ (list-packages . 1)
+ (hideshowvis-enable . 1)
+ (yas-minor-mode . 2)
+)
