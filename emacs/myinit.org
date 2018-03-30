@@ -25,13 +25,13 @@ Brings up some help
   :ensure t
   :config (which-key-mode))
 #+END_SRC
-* org mode 
+* Org mode 
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
-  (use-package org
-    :ensure t)
+  (setq package-pinned-packages
+	'((org . "org")))
 
   (use-package org-bullets
     :ensure t
@@ -121,14 +121,21 @@ Brings up some help
     (global-flycheck-mode t))
 
   ;; autocomplete
-  (use-package auto-complete
-    :ensure t
-    :init
-    (progn
-      (ac-config-default)
-      (global-auto-complete-mode t)
-      ))
+  ;; (use-package auto-complete
+  ;;   :ensure t
+  ;;   :init
+  ;;   (progn
+  ;;     (ac-config-default)
+  ;;     (global-auto-complete-mode t)
+  ;;     ))
 
+  ;; company
+  (use-package company
+    :ensure t
+    :config
+    (setq company-idle-delay 0)
+    (setq company-minimum-prefix-length 3)
+    (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
 * Python
 #+BEGIN_SRC emacs-lisp
@@ -192,7 +199,7 @@ Brings up some help
     :ensure t)
 #+END_SRC
 
-* C++
+* C / C++
 #+BEGIN_SRC emacs-lisp
   (use-package ggtags
     :ensure t
@@ -202,6 +209,19 @@ Brings up some help
 		(when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
 		  (ggtags-mode 1))))
     )
+
+  (use-package company-irony
+    :ensure t
+    :config
+    (require 'company)
+    (add-to-list 'company-backends 'company-irony))
+
+  (use-package irony
+    :ensure t
+    :config
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cbd-autosetup-compile-options))
 #+END_SRC
 
 * Dumb Jump
@@ -223,11 +243,16 @@ Brings up some help
   (use-package smartparens
     :ensure t
     :config
-    (use-package smartparens-config)
-    (use-package smartparens-html)
-    (use-package smartparens-python)
-    (use-package smartparens-latex)
-    (use-package smartparens-elixir)
+    (use-package smartparens-config
+      :ensure t)
+    (use-package smartparens-html
+      :ensure t)
+    (use-package smartparens-python
+      :ensure t)
+    (use-package smartparens-latex
+      :ensure t)
+    (use-package smartparens-elixir
+      :ensure t)
     (smartparens-global-mode t)
     (show-smartparens-global-mode t)
     :bind
@@ -287,4 +312,17 @@ Brings up some help
     :config
     (projectile-global-mode)
     (setq projectile-completion-system 'ivy))
+#+END_SRC
+* Elixir / Alchemist
+#+BEGIN_SRC emacs-lisp
+  (use-package elixir-mode
+    :ensure t)
+
+  (use-package alchemist
+    :ensure t
+    :config
+    (add-hook 'elixir-mode-hook 'alchemist-mode)
+    (add-hook 'elixir-mode-hook 'alchemist-phoenix-mode)
+    (add-hook 'elixir-mode-hook 'company-mode)
+    )
 #+END_SRC
