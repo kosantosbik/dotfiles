@@ -1,10 +1,17 @@
 #+STARTIP: overview
 * interface tweaks
 #+BEGIN_SRC emacs-lisp
-(setq inhibit-startup-message t)
-(tool-bar-mode -1)
-(fset 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "<f5>") 'revert-buffer) 
+  (setq inhibit-startup-message t)
+  (tool-bar-mode -1)
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (global-set-key (kbd "<f5>") 'revert-buffer) 
+
+  ;; default text-scale
+  (use-package default-text-scale
+    :ensure t
+    :config
+    (global-set-key (kbd "C-M-=") 'default-text-scale-increase)
+    (global-set-key (kbd "C-M--") 'default-text-scale-decrease))
 #+END_SRC
 * try
 #+BEGIN_SRC emacs-lisp
@@ -136,6 +143,11 @@ Brings up some help
     :config
     (elpy-enable)
     (setq elpy-rpc-python-command "python3"))
+
+  (use-package importmagic
+    :ensure t
+    :config
+    (add-hook 'python-mode-hook 'importmagic-mode))
 #+END_SRC
 * Yasnippet
 #+BEGIN_SRC emacs-lisp
@@ -191,3 +203,87 @@ Brings up some help
     )
 #+END_SRC
 
+* Dumb Jump
+#+BEGIN_SRC emacs-lisp
+  (use-package dumb-jump
+    :bind (("M-g o" . dumb-jump-go-other-window)
+	   ("M-g j" . dumb-jump-go)
+	   ("M-g x" . dumb-jump-go-prefer-external)
+	   ("M-g z" . dumb-jump-go-prefer-external-other-window))
+    :config 
+    ;; (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
+    :init
+    (dumb-jump-mode)
+    :ensure
+    )
+#+END_SRC
+* Smartparens
+#+BEGIN_SRC emacs-lisp
+  (use-package smartparens
+    :ensure t
+    :config
+    (use-package smartparens-config)
+    (use-package smartparens-html)
+    (use-package smartparens-python)
+    (use-package smartparens-latex)
+    (use-package smartparens-elixir)
+    (smartparens-global-mode t)
+    (show-smartparens-global-mode t)
+    :bind
+    ( ("C-<down>" . sp-down-sexp)
+      ("C-<up>"   . sp-up-sexp)
+      ("M-<down>" . sp-backward-down-sexp)
+      ("M-<up>"   . sp-backward-up-sexp)
+      ("C-M-a" . sp-beginning-of-sexp)
+      ("C-M-e" . sp-end-of-sexp)
+
+
+
+      ("C-M-f" . sp-forward-sexp)
+      ("C-M-b" . sp-backward-sexp)
+
+      ("C-M-n" . sp-next-sexp)
+      ("C-M-p" . sp-previous-sexp)
+
+      ("C-S-f" . sp-forward-symbol)
+      ("C-S-b" . sp-backward-symbol)
+
+      ("C-<right>" . sp-forward-slurp-sexp)
+      ("M-<right>" . sp-forward-barf-sexp)
+      ("C-<left>"  . sp-backward-slurp-sexp)
+      ("M-<left>"  . sp-backward-barf-sexp)
+
+      ("C-M-t" . sp-transpose-sexp)
+      ("C-M-k" . sp-kill-sexp)
+      ("C-k"   . sp-kill-hybrid-sexp)
+      ("M-k"   . sp-backward-kill-sexp)
+      ("C-M-w" . sp-copy-sexp)
+
+      ("C-M-d" . delete-sexp)
+
+      ("M-<backspace>" . backward-kill-word)
+      ("C-<backspace>" . sp-backward-kill-word)
+      ([remap sp-backward-kill-word] . backward-kill-word)
+
+      ("M-[" . sp-backward-unwrap-sexp)
+      ("M-]" . sp-unwrap-sexp)
+
+      ("C-x C-t" . sp-transpose-hybrid-sexp)
+
+      ("C-c ("  . wrap-with-parens)
+      ("C-c ["  . wrap-with-brackets)
+      ("C-c {"  . wrap-with-braces)
+      ("C-c '"  . wrap-with-single-quotes)
+      ("C-c \"" . wrap-with-double-quotes)
+      ("C-c _"  . wrap-with-underscores)
+      ("C-c `"  . wrap-with-back-quotes)
+      ))
+#+END_SRC
+* Projectile
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure t
+    :config
+    (projectile-global-mode)
+    (setq projectile-completion-system 'ivy))
+#+END_SRC
