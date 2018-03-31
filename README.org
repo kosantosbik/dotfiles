@@ -1,0 +1,3 @@
+* My dotfiles
+** Usage
+- ./init.sh [import/export] [emacs]
