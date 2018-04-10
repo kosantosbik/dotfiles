@@ -3,6 +3,7 @@
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
   (tool-bar-mode -1)
+  (scroll-bar-mode -1)
   (fset 'yes-or-no-p 'y-or-n-p)
   (global-set-key (kbd "<f5>") 'revert-buffer) 
 
@@ -243,16 +244,11 @@ Brings up some help
   (use-package smartparens
     :ensure t
     :config
-    (use-package smartparens-config
-      :ensure t)
-    (use-package smartparens-html
-      :ensure t)
-    (use-package smartparens-python
-      :ensure t)
-    (use-package smartparens-latex
-      :ensure t)
-    (use-package smartparens-elixir
-      :ensure t)
+    (use-package smartparens-config)
+    (use-package smartparens-html)
+    (use-package smartparens-python)
+    (use-package smartparens-latex)
+    (use-package smartparens-elixir)
     (smartparens-global-mode t)
     (show-smartparens-global-mode t)
     :bind
@@ -316,7 +312,9 @@ Brings up some help
 * Elixir / Alchemist
 #+BEGIN_SRC emacs-lisp
   (use-package elixir-mode
-    :ensure t)
+    :ensure t
+    :config 
+    (add-hook 'elixir-mode-hook 'smart-tabs-mode))
 
   (use-package alchemist
     :ensure t
@@ -325,4 +323,26 @@ Brings up some help
     (add-hook 'elixir-mode-hook 'alchemist-phoenix-mode)
     (add-hook 'elixir-mode-hook 'company-mode)
     )
+
+  (use-package flycheck-mix
+    :ensure t
+    :config
+    (flycheck-mix-setup))
+
+  (use-package flycheck-credo
+    :ensure t
+    :config
+    (eval-after-load 'flycheck
+      '(flycheck-credo-setup)))
+#+END_SRC
+* Dashboard
+#+BEGIN_SRC emacs-lisp
+  (use-package dashboard
+    :config
+    (dashboard-setup-startup-hook))
+#+END_SRC
+* Smart-Tabs-Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package smart-tabs-mode
+    :ensure t)
 #+END_SRC
