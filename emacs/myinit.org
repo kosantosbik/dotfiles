@@ -138,26 +138,6 @@ Brings up some help
     (setq company-minimum-prefix-length 3)
     (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
-* Python
-#+BEGIN_SRC emacs-lisp
-  (use-package jedi
-    :ensure t
-    :init
-    (add-hook 'python-mode-hook 'jedi:setup)
-    (add-hook 'python-mode-hook 'jedi:ac-setup))
-
-  (use-package elpy
-    :ensure t
-    :config
-    (elpy-enable)
-    (setq elpy-rpc-python-command "python3")
-    (setq python-shell-interpreter "python3"))
-
-  (use-package importmagic
-    :ensure t
-    :config
-    (add-hook 'python-mode-hook 'importmagic-mode))
-#+END_SRC
 * Yasnippet
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
@@ -198,31 +178,6 @@ Brings up some help
 
   (use-package iedit
     :ensure t)
-#+END_SRC
-
-* C / C++
-#+BEGIN_SRC emacs-lisp
-  (use-package ggtags
-    :ensure t
-    :config 
-    (add-hook 'c-mode-common-hook
-	      (lambda ()
-		(when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-		  (ggtags-mode 1))))
-    )
-
-  (use-package company-irony
-    :ensure t
-    :config
-    (require 'company)
-    (add-to-list 'company-backends 'company-irony))
-
-  (use-package irony
-    :ensure t
-    :config
-    (add-hook 'c++-mode-hook 'irony-mode)
-    (add-hook 'c-mode-hook 'irony-mode)
-    (add-hook 'irony-mode-hook 'irony-cbd-autosetup-compile-options))
 #+END_SRC
 
 * Dumb Jump
@@ -309,6 +264,51 @@ Brings up some help
     (projectile-global-mode)
     (setq projectile-completion-system 'ivy))
 #+END_SRC
+* Python
+#+BEGIN_SRC emacs-lisp
+  (use-package jedi
+    :ensure t
+    :init
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (add-hook 'python-mode-hook 'jedi:ac-setup))
+
+  (use-package elpy
+    :ensure t
+    :config
+    (elpy-enable)
+    (setq elpy-rpc-python-command "python3")
+    (setq python-shell-interpreter "python3"))
+
+  (use-package importmagic
+    :ensure t
+    :config
+    (add-hook 'python-mode-hook 'importmagic-mode))
+#+END_SRC
+
+* C / C++
+#+BEGIN_SRC emacs-lisp
+  (use-package ggtags
+    :ensure t
+    :config 
+    (add-hook 'c-mode-common-hook
+	      (lambda ()
+		(when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+		  (ggtags-mode 1))))
+    )
+
+  (use-package company-irony
+    :ensure t
+    :config
+    (require 'company)
+    (add-to-list 'company-backends 'company-irony))
+
+  (use-package irony
+    :ensure t
+    :config
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cbd-autosetup-compile-options))
+#+END_SRC
 * Elixir / Alchemist
 #+BEGIN_SRC emacs-lisp
   (use-package elixir-mode
@@ -334,6 +334,11 @@ Brings up some help
     :config
     (eval-after-load 'flycheck
       '(flycheck-credo-setup)))
+#+END_SRC
+* Haskell
+#+BEGIN_SRC emacs-lisp
+  (use-package haskell-mode
+    :ensure t)
 #+END_SRC
 * Dashboard
 #+BEGIN_SRC emacs-lisp
