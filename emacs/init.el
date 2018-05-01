@@ -17,9 +17,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/.emacs.d/myinit.org")))
  '(package-selected-packages
    (quote
-    (haskell-mode epc importmagic smart-tabs-mode elixir-format flycheck-credo flycheck-mix spaceline zerodark-theme smartparens-elixir smartparens-latex smartparens-python smartparens-html smartparens-config py-autopep8 material-theme ein better-defaults ggtags iedit expand-region aggressive-indent beacon yasnippet-snippets jedi htmlize org ox-reveal which-key use-package try counsel auto-complete ace-window))))
+    (multiple-cursors haskell-mode epc importmagic smart-tabs-mode elixir-format flycheck-credo flycheck-mix spaceline zerodark-theme smartparens-elixir smartparens-latex smartparens-python smartparens-html smartparens-config py-autopep8 material-theme ein better-defaults ggtags iedit expand-region aggressive-indent beacon yasnippet-snippets jedi htmlize org ox-reveal which-key use-package try counsel auto-complete ace-window))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
