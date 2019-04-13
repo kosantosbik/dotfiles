@@ -44,12 +44,6 @@ Brings up some help
 #+END_SRC
 * Org mode
 #+BEGIN_SRC emacs-lisp
-  (require 'package)
-  (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-
-  (setq package-pinned-packages
-	'((org . "org")))
-
   ;; org capture
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (define-key global-map "\C-cc" 'org-capture)
