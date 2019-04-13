@@ -302,6 +302,7 @@ Brings up some help
 * Dashboard
 #+BEGIN_SRC emacs-lisp
   (use-package dashboard
+    :ensure t
     :config
     (dashboard-setup-startup-hook))
 #+END_SRC
