@@ -132,3 +132,14 @@ ex ()
 	fi
 }
 
+cemacs ()
+{
+	if [ -d ~/.emacs.d.bak ]; then
+		mv ~/.emacs.d ~/.emacs.d.doom
+		mv ~/.emacs.d.bak ~/.emacs.d
+	else
+		mv ~/.emacs.d ~/.emacs.d.bak
+		mv ~/.emacs.d.doom ~/.emacs.d
+	fi
+}
+
